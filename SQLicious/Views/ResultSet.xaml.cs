@@ -27,13 +27,7 @@ namespace SQLicious.Views
             ResultSetVM vm = new ResultSetVM();
             this.DataContext = vm;
 
-            for (int i = 0; i < vm.Results.Columns.Count; i++)
-            {
-                ResultSetGrid.Columns.Add(vm.Results.Columns[i]);
-            }
-                ResultSetGrid.Columns.
-
-                InitializeComponent();
+            InitializeComponent();
         }
     }
 }
