@@ -12,16 +12,24 @@ namespace SQLicious.Models
 {
     class ResultSetData
     {
+        private List<string> _columns;
+        private List<Dictionary<string,dynamic>> _rows;
+
         public List<string> Columns
         {
-            get;
-            set;
+            get { return _columns ?? (_columns = new List<string>()); }
+            set { _columns = value; }
         }
 
         public List<Dictionary<string,dynamic>> Rows
         {
-            get;
-            set;
+            get { return _rows ?? (_rows = new List<Dictionary<string,dynamic>>()); }
+            set { _rows = value; }
+        }
+
+        public ResultSetData()
+        {
+
         }
     }
 
@@ -36,8 +44,7 @@ namespace SQLicious.Models
             {
                 _cacheConnect = new CacheConnection();
                 _cacheConnect.ConnectionString = "Server = localhost;Port = 1972;Namespace=SAMPLES;"
-                                                 + "Password=v00d00; User ID=chmthompson";
-
+                                                                + "Password=v00d00; User ID=cacheusr";
                 _cacheConnect.Open();
                 // Should this be created in readQuery perhaps?
             
@@ -64,7 +71,8 @@ namespace SQLicious.Models
                 if (record == 0) {
                     // Get name based off ordinal position
                     for (int i = 0; i < fields; i++) {
-                        rsData.Columns.Add(reader.GetName(i));
+                        var sname = reader.GetName(i);
+                        rsData.Columns.Add(sname);
                     }
                 }
                 // Now get values
