@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using SQLicious.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace SQLicious.Views
 {
@@ -28,6 +29,18 @@ namespace SQLicious.Views
             this.DataContext = vm;
 
             InitializeComponent();
+
+            foreach (string columnName in vm.Results.Columns)
+            {
+               var column = new DataGridTextColumn();
+               column.Header = columnName;
+               ResultSetGrid.Columns.Add(column);
+            }
+
+            foreach (var row in vm.Results.Rows)
+            {
+                //need to figure out best way to bind rows
+            }
         }
     }
 }

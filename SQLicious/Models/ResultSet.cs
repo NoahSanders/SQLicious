@@ -46,8 +46,6 @@ namespace SQLicious.Models
                 _cacheConnect.ConnectionString = "Server = localhost;Port = 1972;Namespace=SAMPLES;"
                                                                 + "Password=v00d00; User ID=cacheusr";
                 _cacheConnect.Open();
-                // Should this be created in readQuery perhaps?
-            
             }
             catch (Exception e)
             {
@@ -82,6 +80,7 @@ namespace SQLicious.Models
                 }
 
                 rsData.Rows.Add(values);
+                record++;
             }
 
             return rsData;
