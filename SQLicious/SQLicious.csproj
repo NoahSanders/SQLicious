@@ -34,9 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InterSystems.Data.CacheClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=ad350a26c4a4447c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\InterSystems\Ensemble\dev\dotnet\bin\v4.0.30319\InterSystems.Data.CacheClient.dll</HintPath>
+    <Reference Include="InterSystems.Data.CacheClient">
+      <HintPath>..\..\InterSystems.Data.CacheClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
