@@ -13,7 +13,7 @@ namespace SQLicious.Models
     class ResultSetData
     {
         private List<string> _columns;
-        private List<Dictionary<string,dynamic>> _rows;
+        private List<Dictionary<string,object>> _rows;
 
         public List<string> Columns
         {
@@ -21,9 +21,9 @@ namespace SQLicious.Models
             set { _columns = value; }
         }
 
-        public List<Dictionary<string,dynamic>> Rows
+        public List<Dictionary<string,object>> Rows
         {
-            get { return _rows ?? (_rows = new List<Dictionary<string,dynamic>>()); }
+            get { return _rows ?? (_rows = new List<Dictionary<string,object>>()); }
             set { _rows = value; }
         }
 
@@ -64,7 +64,7 @@ namespace SQLicious.Models
             {
                 // Get the column number
                 int fields = reader.VisibleFieldCount;
-                Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
+                Dictionary<string, object> values = new Dictionary<string, object>();
                 // We only do this once to get column names
                 if (record == 0) {
                     // Get name based off ordinal position

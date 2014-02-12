@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Dynamic;
+
 using SQLicious.ViewModels;
 using System.Collections.ObjectModel;
 
@@ -24,23 +26,39 @@ namespace SQLicious.Views
     public partial class ResultSet : UserControl
     {
         public ResultSet()
-        {
+        {   
+            // mvvm bullshit
             ResultSetVM vm = new ResultSetVM();
-            this.DataContext = vm;
-
             InitializeComponent();
 
+            // Create a table
+            System.Data.DataTable table = new System.Data.DataTable();
+            
+            // Add the columns to the table
             foreach (string columnName in vm.Results.Columns)
             {
-               var column = new DataGridTextColumn();
-               column.Header = columnName;
-               ResultSetGrid.Columns.Add(column);
+                table.Columns.Add(columnName);
             }
 
-            foreach (var row in vm.Results.Rows)
+            //// Foreach row
+            for (int i = 0; i<5; i++)
             {
-                //need to figure out best way to bind rows
+                // The current dictionary value
+                Dictionary<string, object> rowDictionary = vm.Results.Rows[i];
+                var tableRow = table.NewRow();
+
+                // table's row->column = dictionary's row->column
+                foreach (string columnName in vm.Results.Columns)
+                {
+                    tableRow[columnName] = rowDictionary[columnName];
+                }
+
+                // Add the row to the system table
+                table.Rows.Add(tableRow);
             }
+
+            ResultSetGrid.DataContext = table.DefaultView;
+            ResultSetGrid.ItemsSource = table.DefaultView;
         }
     }
 }
