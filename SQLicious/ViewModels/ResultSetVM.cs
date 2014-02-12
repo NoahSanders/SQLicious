@@ -12,15 +12,16 @@ namespace SQLicious.ViewModels
     class ResultSetVM
     {
         private ResultSet _resultSet = new ResultSet();
+        private string _sql;
 
         public System.Data.DataTable Results
         {
-            get { return _resultSet.readQuery("SELECT * FROM Sample.Person"); }
+            get { return _resultSet.readQuery(_sql); }
         }
 
-        public ResultSetVM()
+        public ResultSetVM(string sql)
         {
-            // do stuff
+            _sql = sql;
         }
     
     }

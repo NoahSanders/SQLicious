@@ -28,7 +28,7 @@ namespace SQLicious.Views
         public ResultSet()
         {   
             // mvvm bullshit
-            ResultSetVM vm = new ResultSetVM();
+            ResultSetVM vm = new ResultSetVM("SELECT * FROM Sample.Person");
             this.DataContext = vm;
             //ResultSetGrid.ItemsSource = vm.Results.DefaultView;
             InitializeComponent();
