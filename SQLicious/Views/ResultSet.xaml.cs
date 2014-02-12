@@ -29,36 +29,9 @@ namespace SQLicious.Views
         {   
             // mvvm bullshit
             ResultSetVM vm = new ResultSetVM();
+            this.DataContext = vm;
+            //ResultSetGrid.ItemsSource = vm.Results.DefaultView;
             InitializeComponent();
-
-            // Create a table
-            System.Data.DataTable table = new System.Data.DataTable();
-            
-            // Add the columns to the table
-            foreach (string columnName in vm.Results.Columns)
-            {
-                table.Columns.Add(columnName);
-            }
-
-            //// Foreach row
-            for (int i = 0; i<5; i++)
-            {
-                // The current dictionary value
-                Dictionary<string, object> rowDictionary = vm.Results.Rows[i];
-                var tableRow = table.NewRow();
-
-                // table's row->column = dictionary's row->column
-                foreach (string columnName in vm.Results.Columns)
-                {
-                    tableRow[columnName] = rowDictionary[columnName];
-                }
-
-                // Add the row to the system table
-                table.Rows.Add(tableRow);
-            }
-
-            ResultSetGrid.DataContext = table.DefaultView;
-            ResultSetGrid.ItemsSource = table.DefaultView;
         }
     }
 }

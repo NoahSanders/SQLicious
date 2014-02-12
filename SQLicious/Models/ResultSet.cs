@@ -4,39 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Data;
 
 using InterSystems.Data.CacheClient;
 using InterSystems.Data.CacheTypes;
 
 namespace SQLicious.Models
 {
-    class ResultSetData
-    {
-        private List<string> _columns;
-        private List<Dictionary<string,object>> _rows;
-
-        public List<string> Columns
-        {
-            get { return _columns ?? (_columns = new List<string>()); }
-            set { _columns = value; }
-        }
-
-        public List<Dictionary<string,object>> Rows
-        {
-            get { return _rows ?? (_rows = new List<Dictionary<string,object>>()); }
-            set { _rows = value; }
-        }
-
-        public ResultSetData()
-        {
-
-        }
-    }
-
     class ResultSet
     {
         private CacheConnection _cacheConnect;
-        private dynamic _sqlObject;
 
         public ResultSet()
         {
@@ -54,36 +31,39 @@ namespace SQLicious.Models
         }
 
         // Will pass the select query to CacheCommand
-        public ResultSetData readQuery(string sql) {
+        public DataTable readQuery(string sql) {
+            DataTable dataTable = new DataTable();
             CacheCommand Command = new CacheCommand(sql, _cacheConnect);
             CacheDataReader reader = Command.ExecuteReader();
-            ResultSetData rsData = new ResultSetData();
+
             int record = 0;
 
             while (reader.Read())
             {
                 // Get the column number
                 int fields = reader.VisibleFieldCount;
-                Dictionary<string, object> values = new Dictionary<string, object>();
+                var tableRow = dataTable.NewRow();
+
                 // We only do this once to get column names
                 if (record == 0) {
                     // Get name based off ordinal position
                     for (int i = 0; i < fields; i++) {
                         var sname = reader.GetName(i);
-                        rsData.Columns.Add(sname);
+                        dataTable.Columns.Add(sname);
                     }
                 }
                 // Now get values
                 for (int i = 0; i < fields; i++)
                 {
-                    values.Add(reader.GetName(i),reader.GetValue(i));
+                    tableRow[reader.GetName(i)] = reader.GetValue(i);
                 }
 
-                rsData.Rows.Add(values);
+
+                dataTable.Rows.Add(tableRow);
                 record++;
             }
 
-            return rsData;
+            return dataTable;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SQLicious.ViewModels
     {
         private ResultSet _resultSet = new ResultSet();
 
-        public ResultSetData Results
+        public System.Data.DataTable Results
         {
             get { return _resultSet.readQuery("SELECT * FROM Sample.Person"); }
         }
