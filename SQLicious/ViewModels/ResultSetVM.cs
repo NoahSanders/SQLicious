@@ -23,6 +23,5 @@ namespace SQLicious.ViewModels
         {
             _sql = sql;
         }
-    
     }
 }
