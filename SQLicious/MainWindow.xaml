@@ -7,12 +7,12 @@
         Background="#FF3C3939"
         >
     <Grid>
-        <TabControl TabStripPlacement="Top" Margin="147,21,0,0">
+        <TabControl Name="NavigationTabs" TabStripPlacement="Top" Margin="147,21,0,0">
             <TabItem Name="queryPage" Header="Query Page" VerticalContentAlignment="Stretch">
                 <views:Query Margin="0,-2,0,2"/>
             </TabItem>
             <TabItem Name="resultset" Header="Result Set">
-                <views:ResultSet/>
+                <views:ResultSet />
             </TabItem>
         </TabControl>
         <!--<views:TreeView Margin="-2,24,686,-24" VerticalContentAlignment="Stretch"/>-->
