@@ -11,23 +11,10 @@ using InterSystems.Data.CacheTypes;
 
 namespace SQLicious.Models
 {
-    class ResultSet
+    class ResultSet : ConnectionBase
     {
-        private CacheConnection _cacheConnect;
-
         public ResultSet()
         {
-            try
-            {
-                _cacheConnect = new CacheConnection();
-                _cacheConnect.ConnectionString = "Server = localhost;Port = 1972;Namespace=SAMPLES;"
-                                                                + "Password=v00d00; User ID=cacheusr";
-                _cacheConnect.Open();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
         }
 
         // Will pass the select query to CacheCommand

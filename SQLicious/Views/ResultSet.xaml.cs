@@ -33,5 +33,14 @@ namespace SQLicious.Views
             //ResultSetGrid.ItemsSource = vm.Results.DefaultView;
             InitializeComponent();
         }
+
+        public void UpdateResultSet(string sqlQuery)
+        {
+            // mvvm bullshit
+            ResultSetVM vm = new ResultSetVM(sqlQuery);
+            this.DataContext = vm;
+
+            //probably need an event handler for the data context change... or something
+        }
     }
 }

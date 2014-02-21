@@ -7,8 +7,20 @@
              d:DesignHeight="300" d:DesignWidth="300"
              Background="#FF3C3939"
              >
+    <UserControl.Resources>
+        <RoutedUICommand x:Key="ExecuteQuery" />
+    </UserControl.Resources>  
+    
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{StaticResource ExecuteQuery}" Executed="ExecuteQuery"/>
+    </UserControl.CommandBindings>
+    
+    <UserControl.InputBindings>
+        <KeyBinding Key="X" Modifiers="Alt" Command="{StaticResource ExecuteQuery}" />
+    </UserControl.InputBindings>
+    
     <Grid>
-        <RichTextBox AcceptsTab="True">
+        <RichTextBox  Name="QueryBox" AcceptsTab="True">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>

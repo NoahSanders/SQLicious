@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ConnectionBase.cs" />
     <Compile Include="Models\DataSourceCreator.cs" />
     <Compile Include="ViewModels\QueryVM.cs" />
     <Compile Include="ViewModels\ResultSetVM.cs" />

@@ -24,5 +24,14 @@ namespace SQLicious.Views
         {
             InitializeComponent();
         }
+
+        public void ExecuteQuery(Object sender, ExecutedRoutedEventArgs e)
+        {
+            //switch to ResultSet View
+            ((MainWindow)System.Windows.Application.Current.MainWindow).NavigationTabs.SelectedIndex = 1;
+
+            //refresh ResultSet View with new results
+            //???
+        }
     }
 }

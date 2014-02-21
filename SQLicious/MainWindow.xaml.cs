@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InterSystems.Data.CacheClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,16 @@ namespace SQLicious
     /// </summary>
     public partial class MainWindow : Window
     {
+        public CacheConnection connection;
+
         public MainWindow()
         {
-            InitializeComponent();
+            // connect to database (default for now, takes place at startup)
+            connection = new CacheConnection();
+            connection.ConnectionString = "Server = localhost;Port = 1972;Namespace=SAMPLES;Password=v00d00; User ID=cacheusr";
+            connection.Open();
+
+            InitializeComponent();           
         }
     }
 }
