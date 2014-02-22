@@ -8,7 +8,7 @@
              Background="#FF3C3939"
              >
     <Grid>
-        <DataGrid Name="ResultSetGrid" ItemsSource="{Binding Path=Results}" HorizontalAlignment="Stretch" Margin="0,11,0,-1" VerticalAlignment="Stretch" Foreground="White" RowBackground="#FF3C3939" Background="#FF3C3939" CanUserAddRows="False">
+        <DataGrid Name="ResultSetGrid" ItemsSource="{Binding Path=SQLStatement}" HorizontalAlignment="Stretch" Margin="0,11,0,-1" VerticalAlignment="Stretch" Foreground="White" RowBackground="#FF3C3939" Background="#FF3C3939" CanUserAddRows="False">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridRowHeader}">
                     <Setter Property="Background" Value="#FF3C3939"/>

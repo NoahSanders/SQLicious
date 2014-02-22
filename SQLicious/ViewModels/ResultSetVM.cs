@@ -4,24 +4,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 using SQLicious.Models;
 
 namespace SQLicious.ViewModels
 {
-    class ResultSetVM
+    class ResultSetVM : INotifyPropertyChanged
     {
         private ResultSet _resultSet = new ResultSet();
-        private string _sql;
+        private System.Data.DataTable _results;
+        private string _sqlStatement;
+
+        public string SQLStatement
+        {
+            get { return _sqlStatement; }
+            set
+            {
+                _sqlStatement = value;
+                Results = _resultSet.readQuery(value);
+                OnPropertyChanged("SQLStatement");
+            }
+        }
 
         public System.Data.DataTable Results
         {
-            get { return _resultSet.readQuery(_sql); }
+            // SQLStatement could be undefined when the view is binding to this, return null if so
+            get { return _results; }
+            set
+            {
+                _results = value;
+                OnPropertyChanged("Results");
+            }
         }
 
-        public ResultSetVM(string sql)
+        public ResultSetVM()
         {
-            _sql = sql;
+            _results = _resultSet.readQuery("Select * From Sample.Person");
         }
+
+        #region Implement INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion    
     }
 }

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using SQLicious.ViewModels;
+
 namespace SQLicious.Views
 {
     /// <summary>
@@ -22,6 +24,8 @@ namespace SQLicious.Views
     {
         public Query()
         {
+            ResultSetVM vm = new ResultSetVM();
+            this.DataContext = vm;
             InitializeComponent();
         }
 
@@ -29,9 +33,6 @@ namespace SQLicious.Views
         {
             //switch to ResultSet View
             ((MainWindow)System.Windows.Application.Current.MainWindow).NavigationTabs.SelectedIndex = 1;
-
-            //refresh ResultSet View with new results
-            //???
         }
     }
 }
