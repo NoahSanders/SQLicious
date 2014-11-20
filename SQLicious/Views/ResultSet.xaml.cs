@@ -28,8 +28,7 @@ namespace SQLicious.Views
         public ResultSet()
         {   
             // mvvm bullshit
-            ResultSetVM vm = new ResultSetVM();
-            this.DataContext = vm;
+            this.DataContext = ((MainWindow)System.Windows.Application.Current.MainWindow).resultVM;
             InitializeComponent();
         }
 

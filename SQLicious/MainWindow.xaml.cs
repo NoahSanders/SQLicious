@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SQLicious.ViewModels;
 
 namespace SQLicious
 {
@@ -22,14 +23,10 @@ namespace SQLicious
     public partial class MainWindow : Window
     {
         public CacheConnection connection;
+        public ResultSetVM resultVM = new ResultSetVM();
 
         public MainWindow()
         {
-            // connect to database (default for now, takes place at startup)
-            connection = new CacheConnection();
-            connection.ConnectionString = "Server = localhost;Port = 1972;Namespace=SAMPLES;Password=v00d00; User ID=cacheusr";
-            connection.Open();
-
             InitializeComponent();           
         }
     }

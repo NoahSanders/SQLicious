@@ -10,18 +10,17 @@ using SQLicious.Models;
 
 namespace SQLicious.ViewModels
 {
-    class ResultSetVM : INotifyPropertyChanged
+    public class ResultSetVM : INotifyPropertyChanged
     {
         private ResultSet _resultSet = new ResultSet();
         private System.Data.DataTable _results;
         private string _sqlStatement;
-
+ 
         public string SQLStatement
         {
             get { return _sqlStatement; }
             set
             {
-                _sqlStatement = value;
                 Results = _resultSet.readQuery(value);
                 OnPropertyChanged("SQLStatement");
             }
@@ -29,8 +28,7 @@ namespace SQLicious.ViewModels
 
         public System.Data.DataTable Results
         {
-            // SQLStatement could be undefined when the view is binding to this, return null if so
-            get { return _results; }
+            get { return _results ?? new System.Data.DataTable(); }
             set
             {
                 _results = value;
@@ -40,7 +38,10 @@ namespace SQLicious.ViewModels
 
         public ResultSetVM()
         {
-            _results = _resultSet.readQuery("Select * From Sample.Person");
+            if (SQLStatement != null)
+            {
+                _results = _resultSet.readQuery(SQLStatement);
+            }
         }
 
         #region Implement INotifyPropertyChanged

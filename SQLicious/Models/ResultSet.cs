@@ -20,6 +20,7 @@ namespace SQLicious.Models
         // Will pass the select query to CacheCommand
         public DataTable readQuery(string sql) {
             DataTable dataTable = new DataTable();
+            // set the global sql statement so our views can read them 
             CacheCommand Command = new CacheCommand(sql, _cacheConnect);
             CacheDataReader reader = Command.ExecuteReader();
 
@@ -49,7 +50,7 @@ namespace SQLicious.Models
                 dataTable.Rows.Add(tableRow);
                 record++;
             }
-
+            
             return dataTable;
         }
     }

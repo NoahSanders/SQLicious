@@ -2,8 +2,13 @@
 
 namespace SQLicious.Models
 {
-    abstract class ConnectionBase
+    class ConnectionBase
     {
-        protected CacheConnection _cacheConnect = ((MainWindow)System.Windows.Application.Current.MainWindow).connection;
+        public CacheConnection _cacheConnect = new CacheConnection("localhost","1972","SAMPLES","cacheusr","v00d00");
+
+        public ConnectionBase()
+        {
+            _cacheConnect.Open();
+        }
     }
 }
